@@ -1,105 +1,175 @@
-# 💰 Insurance Cost Prediction (Regression)
-Predicting annual medical insurance charges using Machine Learning regression models.
+# 💰 Insurance Cost Prediction using Machine Learning
+
+This project predicts **annual medical insurance charges** using machine learning regression models based on demographic and health-related features.
+
+It is designed as a **complete, step-by-step machine learning project**, easy for beginners to understand and professional enough for interviews and portfolio review.
 
 ---
 
-## 🧩 Project Overview
-Health insurance companies require accurate cost predictions to offer fair and profitable premium plans.  
-This project provides an automated ML-based solution to estimate annual medical expenditure for new customers based on demographic and health-related features.
+## 📌 Project Overview
 
-The prediction model helps determine the insurance premium that should be offered to each customer.
+Health insurance companies need accurate cost predictions to:
+- Offer fair insurance premiums
+- Reduce financial risk
+- Improve transparency for customers
 
----
+This project builds an **end-to-end machine learning regression pipeline** to estimate insurance charges for individuals.
 
-## 🎯 Problem Context
-An insurance company aims to provide affordable health insurance to thousands of customers.  
-Your task is to create a system that estimates annual medical expenses using:
-
-- Age  
-- Sex  
-- BMI  
-- Number of children  
-- Smoking habits  
-- Residential region  
-
-This is a **Regression Problem**, as the target variable (**charges**) is continuous.
+After training and comparing multiple models, **Random Forest Regressor** was selected as the **final model** due to its **stable performance, good accuracy, and strong generalization**.
 
 ---
 
-## 📌 Algorithms Used
-The following regression algorithms were trained and compared:
+## 🎯 Problem Statement
 
-1. Linear Regression  
-2. KNeighborsRegressor  
-3. DecisionTreeRegressor  
-4. RandomForestRegressor  
-5. GradientBoostingRegressor  
-6. XGBRegressor (Final Best Model)
+The goal of this project is to **predict annual medical insurance charges** for a person using demographic and health-related features.
+
+Since the target variable (**charges**) is a continuous numerical value, this is a **Regression Problem**.
 
 ---
 
-## 📊 Dataset Overview
+## 🧾 Dataset Information
 
-| Feature   | Description                         |
-|-----------|-------------------------------------|
-| age       | Age of the person                   |
-| sex       | Gender (male/female)                |
-| bmi       | Body Mass Index                     |
-| children  | Number of dependent children        |
-| smoker    | Smoking status (yes/no)             |
-| region    | Residential area                    |
-| charges   | Annual insurance charges (target)   |
+- **Dataset Name:** `insurance_Data.csv`
+- **Target Variable:** `charges`
 
-Dataset file: **insurance_Data.csv**
+### 📊 Feature Description
 
----
-
-## 🧪 TASK 1 — Exploratory Data Analysis (EDA)
-
-- Summary statistics  
-- Distribution analysis  
-- Outlier detection  
-- Univariate and bivariate analysis  
-- Correlation matrix & heatmap  
-- Statistical tests:  
-  - Pearson correlation  
-  - Chi-square test  
-  - ANOVA  
+| Feature | Description |
+|-------|------------|
+| age | Age of the individual |
+| sex | Gender (male / female) |
+| bmi | Body Mass Index |
+| children | Number of dependent children |
+| smoker | Smoking status (yes / no) |
+| region | Residential region |
+| charges | Annual insurance charges (Target Variable) |
 
 ---
 
-## ⚙️ TASK 2 — Feature Engineering & Model Building
+## 🧪 Step-by-Step Machine Learning Workflow
 
-### ✔ Data Preparation
-- Encoding categorical variables  
-- Handling skewness  
-- Feature scaling  
-- Train-test split  
-- ML pipeline creation  
-
-### ✔ Model Training & Evaluation  
-All models were evaluated before and after hyperparameter tuning.
+This project follows a **standard machine learning process**, explained clearly below.
 
 ---
 
-## 📈 Model Performance Comparison
+### 🔹 Step 1: Exploratory Data Analysis (EDA)
 
-| Model                     | RMSE Before | RMSE After | R² Before | R² After | Comments |
-|---------------------------|-------------|------------|-----------|----------|----------|
-| Linear Regression         | 5956.34     | 5821.63    | 0.81      | 0.77     | Slight RMSE improvement, small R² drop |
-| KNeighborsRegressor       | 5819.21     | 9872.54    | 0.76      | 0.32     | Performance worsened after tuning |
-| RandomForestRegressor     | 4605.38     | 4621.09    | 0.85      | 0.85     | Stable performance |
-| GradientBoostingRegressor | 5819.21     | 4482.26    | 0.86      | 0.86     | Significant RMSE improvement |
-| XGBRegressor              | 5819.21     | **4483.77**| 0.82      | **0.86** | Best performing model overall |
-| DecisionTreeRegressor     | 5819.21     | 4770.01    | 0.84      | 0.84     | Good RMSE improvement |
+EDA is performed to understand the dataset before model building.
 
-### ⭐ Final Model Used → **XGBRegressor**
-- Best RMSE score  
-- Highest R² score  
-- Best generalization after tuning  
+Actions performed:
+- Checked dataset shape and data types
+- Verified missing values (no missing values found)
+- Analyzed distributions of numerical features
+- Identified outliers using boxplots
+- Studied relationships between features and target
+- Performed correlation analysis
+
+Key insights:
+- Smoking status has the strongest impact on insurance charges
+- Age and BMI significantly influence medical costs
+- Insurance charges are right-skewed
 
 ---
 
-## 🧱 Project Structure
+### 🔹 Step 2: Data Preprocessing & Feature Engineering
 
+The dataset is prepared for machine learning.
 
+Steps performed:
+- Separated features (`X`) and target (`y`)
+- Encoded categorical variables using **OrdinalEncoder**
+- Scaled numerical variables using **StandardScaler**
+- Handled feature outliers (BMI capped)
+- Target variable outliers were **not removed** (they represent real costs)
+- Used **ColumnTransformer** for column-wise preprocessing
+
+---
+
+### 🔹 Step 3: Train–Test Split
+
+The dataset is split into:
+- **80% Training data**
+- **20% Testing data**
+
+Purpose:
+- Train the model on one part of the data
+- Evaluate performance on unseen data
+- Prevent overfitting
+
+---
+
+### 🔹 Step 4: Model Building
+
+Multiple regression models were trained using **machine learning pipelines** to ensure consistent preprocessing.
+
+Models trained:
+- Linear Regression
+- K-Nearest Neighbors Regressor
+- Decision Tree Regressor
+- Random Forest Regressor
+- Gradient Boosting Regressor
+- XGBoost Regressor
+
+---
+
+### 🔹 Step 5: Model Evaluation
+
+All models were evaluated using standard regression metrics:
+- **Mean Absolute Error (MAE)**
+- **Root Mean Squared Error (RMSE)**
+- **R² Score**
+
+These metrics help compare prediction accuracy and error magnitude.
+
+---
+
+### 🔹 Step 6: Hyperparameter Tuning
+
+Hyperparameter tuning was performed using **RandomizedSearchCV**.
+
+Important notes:
+- A reduced search space was used to save computation time
+- In some cases, default parameters performed similarly or slightly better
+- This indicates the baseline model was already well-optimized
+
+---
+
+### ⭐ Step 7: Final Model Selection
+
+**Final Model Selected:** **Random Forest Regressor**
+
+Reasons:
+- Stable and high R² score
+- Low RMSE
+- Strong generalization on test data
+- Robust to non-linear relationships and outliers
+
+---
+
+## 📈 Final Model Performance (Random Forest)
+
+| Metric | Performance |
+|------|------------|
+| MAE | Low |
+| RMSE | Low |
+| R² Score | High |
+
+(Exact metric values are available in the notebook output.)
+
+---
+
+## 🚀 Prediction System
+
+The final trained model:
+- Accepts user inputs (age, BMI, smoking status, etc.)
+- Applies preprocessing automatically using pipeline
+- Predicts annual insurance charges accurately
+- Model is saved as a **pickle file** for reuse or deployment
+
+---
+
+## ▶️ How to Run This Project (Step-by-Step)
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-link>
