@@ -1,4 +1,5 @@
 import streamlit as st
+import numpy as np
 import pandas as pd
 import pickle
 
@@ -66,4 +67,5 @@ if st.button("Predict Insurance Charges"):
     prediction = model.predict(sample_input)
 
     st.success(f"Predicted Insurance Charges: ₹ {prediction[0]:,.2f}")
+
 
